@@ -1,0 +1,17 @@
+<!DOCTYPE xml SYSTEM "MiroParameterDescription.dtd">
+<config>
+  <config_global name="namespace" value="kn" />
+  <config_global name="include" value="knMotor/MotorParameters.h" />
+  <config_global name="include" value="knShare/Singleton.h" />
+
+  <config_group name="Locomotion">
+    <config_item name="SimWheelGroup" parent="kn::WheelGroup" instance="false" final="false">
+      <config_parameter name="statusInterval" type="ACE_Time_Value" default="0, 33333" />
+    </config_item>
+
+    <config_item name="SimWheelGroupSvc" parent="Miro::Config" instance="kn::Singleton" final="true">
+      <config_parameter name="svcName" type="string" default="WheelGroup" />
+      <config_parameter name="wheelGroup" type="SimWheelGroupParameters" />
+    </config_item>
+  </config_group>
+</config>

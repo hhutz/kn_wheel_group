@@ -1,0 +1,36 @@
+<!DOCTYPE xml SYSTEM "MiroParameterDescription.dtd">
+<config>
+  <config_global name="namespace" value="kn" />
+  <config_global name="include" value="miro/ConfigParameters.h" />
+  <config_group name="Actuators" >
+
+    <config_item name="MotorLimits" parent="Miro::Config" instance="false" final="false">
+      <config_parameter name="maxVelocity" type="double" measure="rad/s" default="0." />
+      <config_parameter name="maxAcceleration" type="double" measure="rad/(s*s)" default="0." />
+    </config_item>
+
+    <config_item name="Motor" parent="Miro::Config" final="true" instance="false">
+      <config_parameter name="limits" type="MotorLimitsParameters" />
+    </config_item>
+
+    <config_item name="Wheel" parent="Miro::Config" final="true" instance="false">
+      <config_parameter name="driveMotorName" type="string" />
+      <config_parameter name="steerMotorName" type="string" />
+      <config_parameter name="driveMotorIndex" type="int" />
+      <config_parameter name="steerMotorIndex" type="int" />
+      <config_parameter name="radius" type="double" default="0.135" unit="meter"/>
+    </config_item>
+
+    <config_item name="MotorGroup" parent="Miro::Config" final="false" instance="false">
+      <config_parameter name="name" type="string" default="MotorGroup"/>
+      <config_parameter name="motors" type="vector&lt;MotorParameters&gt;" />
+    </config_item>
+
+    <config_item name="WheelGroup" parent="MotorGroup" final="false" instance="false">
+     <config_parameter name="name" type="string" inherited="true" default="WheelGroup"/>
+      <config_parameter name="telemetryIndex" type="bool" default="false" doc="Use telemetry based trajectory point consumption instead of time based.  K10 and Sim use time based.  KRex uses telemetry based." />
+     <config_parameter name="wheels" type="vector&lt;WheelParameters&gt;" />
+    </config_item>
+
+  </config_group>
+</config>

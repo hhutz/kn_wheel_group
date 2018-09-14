@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>kn_wheel_group</name>
+  <version>1.0.0</version>
+  <description>RoverSw Modules for: Control regime for motorized steerable wheels</description>
+  <maintainer email="hans.utz@nasa.gov">Hans Utz</maintainer>
+
+  <license>NOSA</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>irg_cmake</build_depend>
+  
+  <depend>kn</depend>
+  <depend>Miro</depend>
+  
+</package>

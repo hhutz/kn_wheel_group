@@ -1,0 +1,51 @@
+<!DOCTYPE xml SYSTEM "MiroParameterDescription.dtd">
+<config>
+  <config_global name="namespace" value="kn" />
+  <config_global name="include" value="miro/Parameters.h" />
+  <config_global name="include" value="miro/ConfigParameters.h" />
+  <config_global name="include" value="rapidIo/RapidIoParameters.h" />
+  <config_global name="include" value="rapidExtIo/RapidExtIoParameters.h" />
+  <config_global name="include" value="rapidExtArcIo/RapidExtArcIoParameters.h" />
+
+  <config_group name="Locomotion">
+    <config_item name="WheelGroupJointProvider" parent="rapid::JointTopicPair" final="false" instance="false">
+      <config_parameter name="wheelGroupSampleProfile" type="string" default="RapidSampleQos" />
+      <constructor>
+        config.jointGroupName = "MotorGroup";
+        config.jointDefinitions.resize(8);
+        config.jointDefinitions[0].frameName = "LeftFrontWheelFrame";
+        config.jointDefinitions[0].dof = "Pitch";
+        config.jointDefinitions[1].frameName ="RightFrontWheelFrame";
+        config.jointDefinitions[1].dof = "Pitch";
+        config.jointDefinitions[2].frameName = "LeftRearWheelFrame";
+        config.jointDefinitions[2].dof = "Pitch";
+        config.jointDefinitions[3].frameName = "RightRearWheelFrame";
+        config.jointDefinitions[3].dof = "Pitch";
+        config.jointDefinitions[4].frameName = "LeftFrontSteerFrame";
+        config.jointDefinitions[4].dof = "Yaw";
+        config.jointDefinitions[5].frameName = "RightFrontSteerFrame";
+        config.jointDefinitions[5].dof = "Yaw";
+        config.jointDefinitions[6].frameName = "RightRearSteerFrame";
+        config.jointDefinitions[6].dof = "Yaw";
+        config.jointDefinitions[7].frameName = "LeftRearSteerFrame";
+        config.jointDefinitions[7].dof = "Yaw";
+      </constructor>
+    </config_item>
+
+    <config_item name="WheelGroupSvc" parent="Miro::Config" instance="true" final="true">
+      <config_parameter name="svcName" type="string" default="WheelGroup" />
+      <config_parameter name="wheelGroupName" type="string" default="WheelGroup" />
+      <config_parameter name="externalMotorStatusSvc" type="string" default="" />
+      <config_parameter name="jointProvider" type="WheelGroupJointProviderParameters" />
+    </config_item>
+
+    <config_item name="VelocityController" parent="rapid::ext::arc::Float32TopicPair" final="false">
+      <config_parameter name="topicSuffix" type="string" inherited="true" default="-vctrl" />
+      <config_parameter name="fsdSampleFrequency" type="double" default="30." unit="Hz"/>
+      <config_parameter name="fsdWheelAccel" type="double" default="1.0" unit="m/s/s"/>
+      <config_parameter name="fsdSteerAccel" type="double" default="4."  unit="rad/s/s"/>
+      <config_parameter name="fsdSteerRate"  type="double" default="1."  unit="rad/s"/>
+      <config_parameter name="wheelRadius"  type="double" default="0.4"  unit="rad/s"/>
+    </config_item>
+  </config_group>
+</config>
