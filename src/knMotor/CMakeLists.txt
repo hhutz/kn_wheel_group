@@ -15,7 +15,6 @@ miro_makeparams(MotorParameters.xml )
 
 set( SOURCES
   ${MIRO_MAKEPARAMS_SOURCES}
-  HwReactor.cpp
   Motor.cpp
   MotorBase.cpp 
   MotorFuture.cpp
@@ -31,7 +30,6 @@ set( SOURCES
 set( HEADERS
   ${MIRO_MAKEPARAMS_HEADERS}
   ${EXPORT_FILE}
-  HwReactor.h
   Motor.h
   MotorBase.h
   MotorFuture.h

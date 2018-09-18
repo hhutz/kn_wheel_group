@@ -27,6 +27,8 @@
 
 #include "knSimMotor_Export.h"
 
+#include <miro/ReactorTask.h>
+
 #include <ace/Service_Config.h>
 #include <ace/Service_Object.h>
 
@@ -57,6 +59,8 @@ namespace kn
 
     SimWheelGroupSvcParameters * m_params;
     int m_verbose;
+
+    Miro::ReactorTask m_reactorTask;
 
     SimMotorVector m_motors;
     SimWheelGroup * m_wheelGroup;

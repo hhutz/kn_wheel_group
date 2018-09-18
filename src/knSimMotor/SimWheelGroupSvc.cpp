@@ -32,8 +32,8 @@
 #include "miro/Log.h"
 #include "miro/Configuration.h"
 #include "miro/RobotParameters.h"
-#include "knMotor/HwReactor.h"
 #include "miro/TimeHelper.h"
+#include "miro/ReactorTask.h"
 
 #include <ace/Get_Opt.h>
 
@@ -47,6 +47,7 @@ namespace kn
     m_wheelGroup(NULL)
   {
     MIRO_LOG_CTOR("kn::SimWheelGroupSvc");
+    m_reactorTask.activate();
   }
 
   SimWheelGroupSvc::~SimWheelGroupSvc()
@@ -85,7 +86,7 @@ namespace kn
     m_wheelGroup =
       new SimWheelGroup(m_motors, &params, wParams);
 
-    reactor(HwReactor::instance()->reactor());
+    reactor(m_reactorTask.reactor()); // Event demultiplexer running it's own thread
     m_timerId = reactor()->schedule_timer(this, NULL,
                                           m_params->wheelGroup.statusInterval,
                                           m_params->wheelGroup.statusInterval);
@@ -121,6 +122,9 @@ namespace kn
       reactor()->cancel_timer(m_timerId);
       m_timerId = -1;
     }
+
+    // clean up ReactorTask
+    m_reactorTask.shutdown(true);
 
     m_wheelGroup = NULL;
 
